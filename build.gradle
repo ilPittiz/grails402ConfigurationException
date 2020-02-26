@@ -1,0 +1,49 @@
+buildscript {
+    repositories {
+        maven { url "https://repo.grails.org/grails/core" }
+    }
+    dependencies {
+        classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+    }
+}
+
+version "0.1"
+group "grails402configurationexception"
+
+apply plugin:"eclipse"
+apply plugin:"idea"
+apply plugin:"war"
+apply plugin:"org.grails.grails-web"
+apply plugin:"org.grails.grails-gsp"
+
+repositories {
+    maven { url "https://repo.grails.org/grails/core" }
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+
+	//compile.exclude group: 'io.micronaut', module: 'micronaut-runtime-groovy'
+}
+
+dependencies {
+    developmentOnly("org.springframework.boot:spring-boot-devtools:2.1.9.RELEASE")
+	compile "org.springframework.boot:spring-boot-starter-logging:2.1.9.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-actuator:2.1.9.RELEASE"
+    compile "org.springframework.boot:spring-boot-autoconfigure:2.1.9.RELEASE"
+    provided "org.springframework.boot:spring-boot-starter-tomcat:2.1.9.RELEASE"
+    compile "org.grails:grails-web-boot"
+    compile "org.grails:grails-core"
+
+	compile "org.grails:grails-dependencies"
+
+	console("org.grails:grails-console")
+}
+
+bootRun {
+    sourceResources sourceSets.main
+	systemProperties System.properties
+}
