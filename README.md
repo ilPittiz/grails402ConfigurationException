@@ -1,0 +1,1 @@
+# grails402ConfigurationException
